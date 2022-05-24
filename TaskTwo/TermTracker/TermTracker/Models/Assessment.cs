@@ -12,21 +12,18 @@ namespace TermTracker.Models
       public int AssessmentId { get; set; }
       public string Name { get; set; }
       public string Type { get; set; }
-      public string StartDate { get; set; }
-      public string EndDate { get; set; }
+      //public string EndDate { get; set; }
       public string DueDate { get; set; }
       public bool DueDateNotification { get; set; }
       public int CourseId { get; set; }
 
       public Assessment() {}
 
-      public Assessment(int AssessmentId, string Name, string Type, string StartDate, string EndDate, string DueDate, bool DueDateNotification, int CourseId)
+      public Assessment(int AssessmentId, string Name, string Type, string DueDate, bool DueDateNotification, int CourseId)
       {
          AssessmentId = this.AssessmentId;
          Name = this.Name;
          Type = this.Type;
-         StartDate = this.StartDate;
-         EndDate = this.EndDate;
          DueDate = this.DueDate;
          DueDateNotification = this.DueDateNotification;
          CourseId = this.CourseId;
@@ -101,13 +98,12 @@ namespace TermTracker.Models
             foreach (var notification in notifications)
             {
                double days = DateTime.Parse(notification.DueDate).Subtract(DateTime.Today).TotalDays;
-               // Rubric didn't state when to notify, I chose within 7 days of date
                if (days <= 7 && days >= 0)
                {
                   message += $"{notification.Type} Assessment: {notification.Name} is due {notification.DueDate}\n\n";
                }
             }
-            Console.WriteLine(message);
+            message += ObjectiveAssessment.CheckNotifications();
             return message;
          }
       }
