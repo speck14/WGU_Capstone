@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.Views.EditNotes">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="CourseNameLabel"
+                   Text="{Binding Name}" 
+                   FontSize="Large" HorizontalTextAlignment="Center"/>
+            <Editor Text="{Binding Path=Notes}" HeightRequest="500"/>
+            <Button Text="Update Notes" Command="{Binding Path=UpdateNotesCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

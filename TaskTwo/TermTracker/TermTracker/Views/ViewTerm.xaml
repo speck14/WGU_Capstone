@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.ViewTerm">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Course" Command="{Binding AddCourseCommand}"/>
+        <ToolbarItem Text="Edit Term" Command="{Binding EditTermCommand}" />
+        <ToolbarItem Text="Delete Term" Command="{Binding DeleteTermCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <StackLayout HorizontalOptions="Center">
+                <Label x:Name="TermTitleLabel"
+                   Text="{Binding TermTitle}" 
+                   FontSize="Large" />
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="Center">
+                <Label Text="{Binding StartDate}" FontSize="Medium"/>
+                <Label Text=" - " FontSize="Medium" />
+                <Label Text="{Binding EndDate}" FontSize="Medium"/>
+            </StackLayout>
+            
+            <BoxView   VerticalOptions="Center"
+           HorizontalOptions="FillAndExpand"
+           HeightRequest="1" 
+           Color="#5b5d68"/>
+
+                <StackLayout>
+                    <ListView x:Name="TermCourses_ListView" ItemSelected="TermCourses_ListView_ItemSelected" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="10, 5, 0, 10">
+                                        <StackLayout Orientation="Horizontal" >
+                                            <Label Text="{Binding Name}" FontSize="Title"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Status:" Margin="240, 0, 0, 0"/>
+                                            <Label Text="{Binding Status}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding StartDate}"/>
+                                            <Label Text=" - "/>
+                                            <Label Text="{Binding EndDate}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

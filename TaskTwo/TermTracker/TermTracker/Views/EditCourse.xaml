@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.Views.EditCourse">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Update Course" Command="{Binding Path=UpdateCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout HeightRequest="1500">
+                <StackLayout Margin="10, 0, 0, 10">
+                    <Entry Placeholder="{Binding Name}" Text="{Binding Path=Name}" FontSize="Large"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 5">
+                    <Label Text="Start Date: " />
+                    <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=StartDate}"/>
+                    <Label Text="End Date: " />
+                    <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=EndDate}"/>
+                </StackLayout>
+
+                <StackLayout Margin="10, 0, 0, 5">
+                    <Label Text="Due Date: "/>
+                    <DatePicker  MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=DueDate}" />
+                </StackLayout>
+
+                <StackLayout Margin="10, 0, 0, 5">
+                    <Label Text="Course Status:"/>
+                    <Picker x:Name="Course_Picker" SelectedItem="{Binding Path=Status}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Unstarted</x:String>
+                                <x:String>In Progress</x:String>
+                                <x:String>Finished</x:String>
+                                <x:String>Overdue</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </StackLayout>
+                <StackLayout Margin="10, 0, 0, 0">
+                    <Label Text="Instructor Information" FontSize="Medium" />
+                    <Label Text="Instructor Name:" />
+                    <Entry Placeholder="Instructor Name" Text="{Binding Path=InstructorName}"/>
+                    <Label Text="Instructor Email: "/>
+                    <Entry Placeholder="Instructor Email" Text="{Binding Path=InstructorEmail}"/>
+                    <Label Text="Instructor Phone: "/>
+                    <Entry Placeholder="Instructor Phone" Text="{Binding Path=InstructorPhone}"/>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="Center">
+                    <Label Text="Notifications: "/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Switch OnColor="Green" ThumbColor="Gray" IsToggled="{Binding Path=StartNotification}" Margin="10, 0, 0, 10"/>
+                    <Label Text="Start Date Notification"/>
+                    <Switch OnColor="Green" ThumbColor="Gray" IsToggled="{Binding Path=EndNotification}" Margin="25, 0, 0, 0"/>
+                    <Label Text="End Date Notification"/>
+                </StackLayout>
+
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

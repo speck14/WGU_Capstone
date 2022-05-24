@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.Views.AddCourse">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AddCourseVM x:Key="vm" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <StackLayout BindingContext="{Binding Source={StaticResource vm}}">
+                
+                <StackLayout>
+                    <Entry Placeholder="Course Name" Text="{Binding Name, Mode=TwoWay}"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Start Date: " />
+                    <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding StartDate, Mode=TwoWay}"/>
+                    <Label Text="End Date: " />
+                    <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding EndDate, Mode=TwoWay}"/>
+                </StackLayout>
+                
+                <StackLayout>
+                    <Label Text="Due Date: "/>
+                    <DatePicker  MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding DueDate, Mode=TwoWay}" />
+                </StackLayout>
+                
+                <StackLayout>
+                    <Label Text="Course Status:"/>
+                    <Picker x:Name="Course_Picker" SelectedItem="{Binding Status, Mode=TwoWay}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Unstarted</x:String>
+                                <x:String>In Progress</x:String>
+                                <x:String>Finished</x:String>
+                                <x:String>Overdue</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </StackLayout>
+                
+                <StackLayout>
+                    <Entry Placeholder="Instructor Name" Text="{Binding InstructorName, Mode=TwoWay}"/>
+                    <Entry Placeholder="Instructor Email" Text="{Binding InstructorEmail, Mode=TwoWay}"/>
+                    <Entry Placeholder="Instructor Phone" Text="{Binding InstructorPhone, Mode=TwoWay}"/>
+                </StackLayout>
+                
+                <StackLayout HorizontalOptions="Center">
+                    <Label Text="Notifications: "/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Switch OnColor="Green" ThumbColor="Gray" IsToggled="{Binding StartNotification, Mode=TwoWay}" Margin="10, 0, 0, 10"/>
+                    <Label Text="Start Date Notification"/>
+                    <Switch OnColor="Green" ThumbColor="Gray" IsToggled="{Binding EndNotification, Mode=TwoWay}" Margin="25, 0, 0, 0"/>
+                    <Label Text="End Date Notification"/>
+                </StackLayout>
+                
+                <StackLayout>
+                    <Editor Placeholder="Notes (optional)" Text="{Binding Notes, Mode=TwoWay}"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Margin="170, 0, 0, 0">
+                <Button Text="Add Course" Command="{Binding Source={StaticResource vm}, Path=AddCommand}"/>
+            </StackLayout>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

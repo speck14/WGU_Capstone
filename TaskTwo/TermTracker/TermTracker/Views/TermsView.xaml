@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.TermsView"
+             Title="Terms">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:TermsVM x:Key="vm" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Term"
+                     x:Name="Add_Term"
+                     Command="{Binding Source={StaticResource vm}, Path=AddTermCommand}"
+                     />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="AllTerms_ListView" ItemSelected="AllTerms_ListView_ItemSelected" ItemsSource="{Binding Source={StaticResource vm}, Path=Terms}" HasUnevenRows="True" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout x:Name="Term_sl">
+                                <Label Text="{Binding Title}" Margin="10, 0, 0, 0" FontSize="Large"/>
+                                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                                    <Label Text="{Binding StartDate}" Margin="10, 0, 0, 0"/>
+                                    <Label Text=" - " />
+                                    <Label Text="{Binding EndDate}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

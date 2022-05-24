@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.Views.AddTerm">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AddTermVM x:Key="vm" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding Source={StaticResource vm}}">
+                <Entry Placeholder="Term Name" Text="{Binding TermTitle, Mode=TwoWay}"></Entry>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Start Date: " />
+                    <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding StartDate, Mode=TwoWay}"/>
+                    <Label Text="End Date: " />
+                <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding EndDate, Mode=TwoWay}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="175, 0, 0, 0">
+                    <Button Text="Add Term" Command="{Binding Source={StaticResource vm}, Path=SaveNewTermCommand}"/>
+                </StackLayout>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

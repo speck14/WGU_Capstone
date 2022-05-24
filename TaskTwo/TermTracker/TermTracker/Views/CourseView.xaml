@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.Views.CourseView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit Course" Command="{Binding EditCourseCommand}" />
+        <ToolbarItem Text="Delete Course" Command="{Binding DeleteCourseCommand}" />
+        <ToolbarItem Text="View Assessments" Command="{Binding ViewAssessmentsCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <StackLayout Margin="0, 0, 0, 10">
+                <Label x:Name="CourseNameLabel"
+                   Text="{Binding Name}" 
+                   FontSize="Large" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Start Date:" Margin="10, 0, 0, 0"/>
+                <Label Text="{Binding StartDate}" FontSize="Medium" Margin="15, 0, 0, 0"/>
+                <Label Text="End Date:"  Margin="25, 0, 0, 0"/>
+                <Label Text="{Binding EndDate}" FontSize="Medium" Margin="15, 0, 0, 0"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Due Date:" Margin="100, 0, 0, 0"/>
+                <Label Text="{Binding DueDate}" FontSize="Medium" Margin="15, 0, 0, 0"/>
+            </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="Status:" Margin="100, 0, 0, 0"/>
+                    <Label Text="{Binding Status}" FontSize="Medium" Margin="15, 0, 0, 0"/>
+                </StackLayout>
+
+                <BoxView   VerticalOptions="Center"
+           HorizontalOptions="FillAndExpand"
+           HeightRequest="1" 
+           Color="#5b5d68"/>
+
+            <StackLayout Margin="10, 0, 0, 0">
+                <Label Text="Instructor Information:" FontSize="Medium" />
+                <Label Text="{Binding InstructorName}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                <Label Text="{Binding InstructorEmail}" Margin="10, 0, 45, 0"/>
+                <Label Text="{Binding InstructorPhone}" />
+            </StackLayout>
+
+            <BoxView   VerticalOptions="Center"
+           HorizontalOptions="FillAndExpand"
+           HeightRequest="1" 
+           Color="#5b5d68"/>
+
+            <StackLayout Margin="10, 0, 0, 0">
+                <Label Text="Notes:" FontSize="Medium"/>
+                <Label Text="{Binding Notes}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
+                <Button Text="Share Notes" Clicked="Button_Clicked"/>
+                <Button Text="Edit Notes" Command="{Binding EditNotesCommand}"/>
+            </StackLayout>
+            <StackLayout x:Name="recipientPhone" Margin="10, 0, 0, 0">
+                <Entry Placeholder="Enter phone number" Keyboard="Telephone" Text="{Binding Recipient}"/>
+                <Button Text="Send" Command="{Binding ShareNotesCommand}"/>
+            </StackLayout>
+
+        </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>
