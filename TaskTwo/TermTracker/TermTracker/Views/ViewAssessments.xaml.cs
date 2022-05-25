@@ -18,7 +18,7 @@ namespace TermTracker.Views
       {
          InitializeComponent();
          this.currentCourse = currentCourse;
-         BindingContext = new AssessmentsVM(currentCourse);
+        BindingContext = new AssessmentsVM(currentCourse);
       }
       protected override void OnAppearing()
       {

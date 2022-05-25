@@ -77,12 +77,18 @@ namespace TermTracker.Models
             return conn.Update(assessment);
          }
       }
-      public static int DeleteAssessment(Assessment assessment)
+      public static int DeleteAssessments(int courseId)
       {
+         var deleted = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
-            conn.CreateTable<Assessment>();
-            return conn.Delete(assessment);
+            List<Assessment> assessments = conn.Query<Assessment>($"SELECT * FROM Assessment WHERE CourseId=courseId");
+            foreach(var assessment in assessments)
+            {
+               conn.CreateTable<Assessment>();
+               deleted += conn.Delete(assessment);
+            }
+            return deleted;
          }
       }
       public static List<string> GetTypes(int courseId)

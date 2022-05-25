@@ -216,6 +216,7 @@ namespace TermTracker.ViewModels
                assessment_res += Assessment.AddAssessment(performanceAssessment);
                if(assessment_res == 4)
                {
+                  Console.WriteLine(assessment_res);
                   MessagingCenter.Send(this, "AddCourse");
                   await App.Current.MainPage.Navigation.PopAsync();
                }

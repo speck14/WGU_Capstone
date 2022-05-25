@@ -105,8 +105,14 @@ namespace TermTracker.Models
       {
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
-            conn.CreateTable<Course>();
-            return conn.Delete(course);
+            var deleted_course = 0;
+            var deleted_assessments = Assessment.DeleteAssessments(course.CourseId);
+            if(deleted_assessments > 0)
+            {
+               conn.CreateTable<Course>();
+               deleted_course += conn.Delete(course);
+            }
+            return deleted_course;
          }
       }
       public static string CheckNotifications()

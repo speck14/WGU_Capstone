@@ -20,7 +20,7 @@ namespace TermTracker.Views
          InitializeComponent();
          this.courseId = currentAssessment.CourseId;
          this.type = currentAssessment.Type;
-         this.BindingContext = new EditAssessmentVM(currentAssessment);
+       //  this.BindingContext = new EditAssessmentVM(currentAssessment);
       }
       private List<string> AvailableTypes()
       {
@@ -40,7 +40,7 @@ namespace TermTracker.Views
       protected override void OnAppearing()
       {
          base.OnAppearing();
-         EditAssessmentVM.SetCourseId(courseId);
+       //  EditAssessmentVM.SetCourseId(courseId);
          TypePicker.ItemsSource = AvailableTypes();
          TypePicker.SelectedItem = type;
       }

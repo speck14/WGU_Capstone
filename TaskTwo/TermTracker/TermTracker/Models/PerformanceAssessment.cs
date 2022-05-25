@@ -24,5 +24,13 @@ namespace TermTracker.Models
             return conn.Insert(assessment);
          }
       }
+      public static List<PerformanceAssessment> GetPerfAssessments(int assessmentId)
+      {
+         using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+         {
+            conn.CreateTable<PerformanceAssessment>();
+            return conn.Table<PerformanceAssessment>().Where(performanceAssessment => performanceAssessment.AssessmentFK == assessmentId).ToList();
+         }
+      }
    }
 }
