@@ -196,8 +196,29 @@ namespace TermTracker.ViewModels
             var response = Course.AddCourse(course);
             if (response > 0)
             {
-               MessagingCenter.Send(this, "AddCourse");
-               await App.Current.MainPage.Navigation.PopAsync();
+               Assessment objectiveAssessment = new Assessment()
+               {
+                  Name = "Objective Assessment",
+                  Type = "Objective",
+                  DueDate = course.DueDate,
+                  DueDateNotification = false,
+                  CourseId = response
+               };
+               Assessment performanceAssessment = new Assessment()
+               {
+                  Name = "Performance Assessment",
+                  Type = "Performance",
+                  DueDate = course.DueDate,
+                  DueDateNotification = false,
+                  CourseId = response
+               };
+               var assessment_res = Assessment.AddAssessment(objectiveAssessment);
+               assessment_res += Assessment.AddAssessment(performanceAssessment);
+               if(assessment_res == 4)
+               {
+                  MessagingCenter.Send(this, "AddCourse");
+                  await App.Current.MainPage.Navigation.PopAsync();
+               }
             }
             else
             {

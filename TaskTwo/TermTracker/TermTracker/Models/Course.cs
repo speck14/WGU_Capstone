@@ -80,10 +80,17 @@ namespace TermTracker.Models
       }
       public static int AddCourse(Course course)
       {
+         var courseId = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Course>();
-            return conn.Insert(course);
+            conn.Insert(course);
+            List <Course> just_added = conn.Query<Course>($"SELECT * FROM Course ORDER BY column DESC LIMIT 1");
+            foreach(var record in just_added) 
+            {
+               courseId = record.CourseId;
+            }
+            return courseId;
          }
       }
       public static int UpdateCourse(Course course)

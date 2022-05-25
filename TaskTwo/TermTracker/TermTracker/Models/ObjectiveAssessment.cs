@@ -12,10 +12,10 @@ namespace TermTracker.Models
       public int ObjAssessmentId { get; set; }
       public int AssessmentFK { get; set; }
       public string PreAssessmentScore { get; set; }
-      public DateTime ScheduledDate { get; set; }
+      public string ScheduledDate { get; set; }
       public bool ScheduledDateNotification { get; set; }
       public ObjectiveAssessment() { }
-      public ObjectiveAssessment(int ObjAssessmentId, int AssessmentFK, string PreAssessmentScore, DateTime ScheduledDate, bool ScheduledDateNotification)
+      public ObjectiveAssessment(int ObjAssessmentId, int AssessmentFK, string PreAssessmentScore, string ScheduledDate, bool ScheduledDateNotification)
       {
          ObjAssessmentId = this.ObjAssessmentId;
          AssessmentFK = this.AssessmentFK;
@@ -50,7 +50,7 @@ namespace TermTracker.Models
             List<ObjectiveAssessment> notifications = conn.Query<ObjectiveAssessment>($"SELECT * FROM ObjectiveAssessment WHERE ScheduledDateNotification=TRUE;");
             foreach (var notification in notifications)
             {
-               double days = notification.ScheduledDate.Subtract(DateTime.Today).TotalDays;
+               double days = DateTime.Parse(notification.ScheduledDate).Subtract(DateTime.Today).TotalDays;
                if (days <= 7 && days >= 0)
                {
                   message += $"Objective Assessment: {notification.Name} is scheduled for {notification.ScheduledDate}\n\n";
@@ -59,4 +59,5 @@ namespace TermTracker.Models
             return message;
          }
       }
+   }
 }

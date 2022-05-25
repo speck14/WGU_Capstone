@@ -12,7 +12,6 @@ namespace TermTracker.Models
       public int AssessmentId { get; set; }
       public string Name { get; set; }
       public string Type { get; set; }
-      //public string EndDate { get; set; }
       public string DueDate { get; set; }
       public bool DueDateNotification { get; set; }
       public int CourseId { get; set; }
@@ -38,10 +37,36 @@ namespace TermTracker.Models
       }
       public static int AddAssessment(Assessment assessment)
       {
+         var records_inserted = 0;
+         var assessmentId = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Assessment>();
-            return conn.Insert(assessment);
+            records_inserted += conn.Insert(assessment); 
+            List<Assessment> just_added = conn.Query<Assessment>($"SELECT * FROM Assessment ORDER BY column DESC LIMIT 1");
+            foreach (var record in just_added)
+            {
+               assessmentId = record.AssessmentId;
+            }
+            if (assessment.Type == "Objective") 
+            {
+               ObjectiveAssessment objAssessment = new ObjectiveAssessment()
+               {
+                  AssessmentId = assessmentId,
+                  PreAssessmentScore = "Not entered",
+                  ScheduledDate = "",
+                  ScheduledDateNotification = false
+               };
+               records_inserted += ObjectiveAssessment.AddAssessment(objAssessment);
+            } else if (assessment.Type == "Performance")
+            {
+               PerformanceAssessment perfAssessment = new PerformanceAssessment()
+               {
+                  AssessmentId = assessmentId,
+               };
+               records_inserted += PerformanceAssessment.AddAssessment(perfAssessment);
+            }
+            return records_inserted;
          }
       }
       public static int UpdateAssessment(Assessment assessment)
