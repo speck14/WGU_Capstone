@@ -196,15 +196,18 @@ namespace TermTracker.ViewModels
             var response = Course.AddCourse(course);
             if (response > 0)
             {
-               Assessment objectiveAssessment = new Assessment()
+               ObjectiveAssessment objectiveAssessment = new ObjectiveAssessment()
                {
                   Name = "Objective Assessment",
                   Type = "Objective",
                   DueDate = course.DueDate,
                   DueDateNotification = false,
-                  CourseId = response
+                  CourseId = response,
+                  PreAssessmentScore = "Not entered",
+                  ScheduledDate = "",
+                  ScheduledDateNotification = false
                };
-               Assessment performanceAssessment = new Assessment()
+               PerformanceAssessment performanceAssessment = new PerformanceAssessment()
                {
                   Name = "Performance Assessment",
                   Type = "Performance",
@@ -212,9 +215,9 @@ namespace TermTracker.ViewModels
                   DueDateNotification = false,
                   CourseId = response
                };
-               var assessment_res = Assessment.AddAssessment(objectiveAssessment);
-               assessment_res += Assessment.AddAssessment(performanceAssessment);
-               if(assessment_res == 4)
+               var assessment_res = ObjectiveAssessment.AddObjAssessment(objectiveAssessment);
+               assessment_res += PerformanceAssessment.AddPerfAssessment(performanceAssessment);
+               if(assessment_res > 0)
                {
                   Console.WriteLine(assessment_res);
                   MessagingCenter.Send(this, "AddCourse");

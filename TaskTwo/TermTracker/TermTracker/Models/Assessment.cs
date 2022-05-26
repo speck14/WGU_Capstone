@@ -37,17 +37,11 @@ namespace TermTracker.Models
       }
       public static int AddAssessment(Assessment assessment)
       {
-         var records_inserted = 0;
-         var assessmentId = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Assessment>();
-            records_inserted += conn.Insert(assessment); 
-            List<Assessment> just_added = conn.Query<Assessment>($"SELECT * FROM Assessment ORDER BY column DESC LIMIT 1");
-            foreach (var record in just_added)
-            {
-               assessmentId = record.AssessmentId;
-            }
+            return conn.Insert(assessment); 
+            /*
             if (assessment.Type == "Objective") 
             {
                ObjectiveAssessment objAssessment = new ObjectiveAssessment()
@@ -65,8 +59,7 @@ namespace TermTracker.Models
                   AssessmentId = assessmentId,
                };
                records_inserted += PerformanceAssessment.AddAssessment(perfAssessment);
-            }
-            return records_inserted;
+            } */
          }
       }
       public static int UpdateAssessment(Assessment assessment)
@@ -134,7 +127,7 @@ namespace TermTracker.Models
                   message += $"{notification.Type} Assessment: {notification.Name} is due {notification.DueDate}\n\n";
                }
             }
-            message += ObjectiveAssessment.CheckNotifications();
+            message += ObjectiveAssessment.CheckObjNotifications();
             return message;
          }
       }

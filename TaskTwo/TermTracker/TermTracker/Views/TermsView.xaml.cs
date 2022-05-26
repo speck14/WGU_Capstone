@@ -18,7 +18,6 @@ namespace TermTracker
       public TermsView()
       {
          InitializeComponent();
-
          ViewModel = Resources["vm"] as TermsVM;
       }
       protected override void OnAppearing()

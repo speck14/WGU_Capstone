@@ -59,7 +59,7 @@ namespace TermTracker.Models
          TermId = this.TermId;
       }
 
-      /* Deletes EVERYTHING in the Course table
+      // Deletes EVERYTHING in the Course table
       public static int DeleteContents()
       {
          using(SQLiteConnection conn = new SQLiteConnection(App.FilePath))
@@ -68,7 +68,6 @@ namespace TermTracker.Models
             return conn.DeleteAll<Course>();
          }
       }
-      */
 
       public static List<Course> GetCourses(int termId)
       {
@@ -85,9 +84,10 @@ namespace TermTracker.Models
          {
             conn.CreateTable<Course>();
             conn.Insert(course);
-            List <Course> just_added = conn.Query<Course>($"SELECT * FROM Course ORDER BY column DESC LIMIT 1");
+            List <Course> just_added = conn.Query<Course>($"SELECT * FROM Course ORDER BY courseId DESC LIMIT 1");
             foreach(var record in just_added) 
             {
+               Console.WriteLine(record.CourseId);
                courseId = record.CourseId;
             }
             return courseId;
@@ -106,12 +106,10 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             var deleted_course = 0;
-            var deleted_assessments = Assessment.DeleteAssessments(course.CourseId);
-            if(deleted_assessments > 0)
-            {
-               conn.CreateTable<Course>();
-               deleted_course += conn.Delete(course);
-            }
+           Assessment.DeleteAssessments(course.CourseId);
+           conn.CreateTable<Course>();
+            deleted_course += conn.Delete(course);
+
             return deleted_course;
          }
       }

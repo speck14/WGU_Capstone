@@ -9,9 +9,9 @@ using TermTracker.Views;
 
 namespace TermTracker.ViewModels
 {
-   public class AssessmentsVM : INotifyPropertyChanged
+   public class AssessmentsVM// : INotifyPropertyChanged
    { 
-      public event PropertyChangedEventHandler PropertyChanged;
+     // public event PropertyChangedEventHandler PropertyChanged;
       public Command ViewAssessmentCommand { get; set; }
       public Command SetNotificationCommand { get; set; }
 
