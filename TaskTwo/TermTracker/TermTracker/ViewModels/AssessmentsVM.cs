@@ -29,16 +29,22 @@ namespace TermTracker.ViewModels
       }
       public void GetAssessments()
       {
-         var assessments = Assessment.GetAssessments(currentCourse.CourseId);
+         var objAssessment = ObjectiveAssessment.GetObjAssessments(currentCourse.CourseId);
          Assessments.Clear();
-         foreach(var assessment in assessments)
+         foreach(var ob_assessment in objAssessment)
          {
-            Assessments.Add(assessment);
+            Assessments.Add(ob_assessment);
+         }
+         var perfAssessment = PerformanceAssessment.GetPerfAssessments(currentCourse.CourseId);
+         foreach(var per_assessment in perfAssessment)
+         {
+            Assessments.Add(per_assessment);
          }
       }
       public static void OnAppearing(int courseId, ListView assessmentView)
       {
-         assessmentView.ItemsSource = Assessment.GetAssessments(courseId);
+         assessmentView.ItemsSource = ObjectiveAssessment.GetObjAssessments(courseId);
+         //assessmentView.
       }
    }
 }

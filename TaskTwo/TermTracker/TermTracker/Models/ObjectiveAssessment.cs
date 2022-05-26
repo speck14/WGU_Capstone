@@ -8,57 +8,83 @@ namespace TermTracker.Models
 {
    public partial class ObjectiveAssessment : Assessment
    {
-      //[AutoIncrement]
-      //public int ObjAssessmentId { get; set; }
       public string PreAssessmentScore { get; set; }
       public string ScheduledDate { get; set; }
       public bool ScheduledDateNotification { get; set; }
-      //public int AssessmentID { get; set; }
       public ObjectiveAssessment() { }
       public ObjectiveAssessment(string PreAssessmentScore, string ScheduledDate, bool ScheduledDateNotification)
       {
-         //ObjAssessmentId = this.ObjAssessmentId;
          PreAssessmentScore = this.PreAssessmentScore;
          ScheduledDate = this.ScheduledDate;
          ScheduledDateNotification = this.ScheduledDateNotification;
-         //AssessmentID = this.AssessmentID;
       }
       public static int AddObjAssessment(ObjectiveAssessment assessment)
       {
-         Assessment.AddAssessment(assessment);
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<ObjectiveAssessment>();
             return conn.Insert(assessment);
          }
       }
-      /* public static List<ObjectiveAssessment> GetObjAssessments(int assessmentId)
+      public static List<ObjectiveAssessment> GetObjAssessments(int courseId)
       {
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<ObjectiveAssessment>();
-            return conn.Table<ObjectiveAssessment>().Where(objectiveAssessment => objectiveAssessment.AssessmentId == assessmentId).ToList();
+            return conn.Table<ObjectiveAssessment>().Where(objectiveAssessment => objectiveAssessment.CourseId == courseId).ToList();
          }
-      } */
+      }
+      public static int DeleteObjAssessment(int courseId)
+      {
+         var deleted = 0;
+         using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+         {
+            List<ObjectiveAssessment> assessments = conn.Query<ObjectiveAssessment>($"SELECT * FROM ObjectiveAssessment WHERE CourseId=courseId");
+            foreach (var assessment in assessments)
+            {
+               conn.CreateTable<ObjectiveAssessment>();
+               deleted += conn.Delete(assessment);
+            }
+            return deleted;
+         }
+      }
+      public static int DeleteSingleObjAssessment(ObjectiveAssessment assessment)
+      {
+            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+            {
+               conn.CreateTable<ObjectiveAssessment>();
+               return conn.Delete(assessment);
+            }
+      }
 
-      // Implement ScheduledDateNotificaitons
       public static string CheckObjNotifications()
       {
-         string message = "";
+         var message = "";
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<ObjectiveAssessment>();
-            List<ObjectiveAssessment> notifications = conn.Query<ObjectiveAssessment>($"SELECT * FROM ObjectiveAssessment WHERE ScheduledDateNotification=TRUE;");
+            List<ObjectiveAssessment> notifications = conn.Query<ObjectiveAssessment>($"SELECT * FROM ObjectiveAssessment WHERE DueDateNotification=TRUE OR ScheduledDateNotification=TRUE;");
             foreach (var notification in notifications)
             {
-               double days = DateTime.Parse(notification.ScheduledDate).Subtract(DateTime.Today).TotalDays;
-               if (days <= 7 && days >= 0)
+               if(notification.DueDateNotification == true)
                {
-                  message += $"Objective Assessment: {notification.Name} is scheduled for {notification.ScheduledDate}\n\n";
+                  double days = DateTime.Parse(notification.DueDate).Subtract(DateTime.Today).TotalDays;
+                  if (days <= 7 && days >= 0)
+                  {
+                     message += $"{notification.Type} Assessment: {notification.Name} is due {notification.DueDate}\n\n";
+                  }
+               }
+               else if(notification.ScheduledDateNotification == true)
+               {
+                  double days = DateTime.Parse(notification.ScheduledDate).Subtract(DateTime.Today).TotalDays;
+                  if (days <= 7 && days >= 0)
+                  {
+                     message += $"{notification.Type} Assessment: {notification.Name} is scheduled {notification.ScheduledDate}\n\n";
+                  }
                }
             }
-            return message;
          }
+         return message;
       }
    }
 }

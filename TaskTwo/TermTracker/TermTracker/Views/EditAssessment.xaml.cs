@@ -22,26 +22,11 @@ namespace TermTracker.Views
          this.type = currentAssessment.Type;
        //  this.BindingContext = new EditAssessmentVM(currentAssessment);
       }
-      private List<string> AvailableTypes()
-      {
-         var availableTypes = new List<string>();
-         var assessments = Assessment.GetAssessments(courseId);
-         if (assessments.Count == 2)
-         {
-            availableTypes.Add(type);
-         }
-         else
-         {
-            availableTypes.Add("Performance");
-            availableTypes.Add("Objective");
-         }
-         return availableTypes;
-      }
+
       protected override void OnAppearing()
       {
          base.OnAppearing();
        //  EditAssessmentVM.SetCourseId(courseId);
-         TypePicker.ItemsSource = AvailableTypes();
          TypePicker.SelectedItem = type;
       }
    }

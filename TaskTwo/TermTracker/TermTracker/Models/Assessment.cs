@@ -27,46 +27,27 @@ namespace TermTracker.Models
          DueDateNotification = this.DueDateNotification;
          CourseId = this.CourseId;
       }
-      public static List<Assessment> GetAssessments(int courseId)
+      public static int AddAssessment(ObjectiveAssessment assessment)
+      {
+            return ObjectiveAssessment.AddObjAssessment(assessment);
+      }
+      public static int AddAssessment(PerformanceAssessment assessment)
+      {
+         return PerformanceAssessment.AddPerfAssessment(assessment);
+      }
+      public static int UpdateAssessment(ObjectiveAssessment assessment)
       {
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
-            conn.CreateTable<Assessment>();
-            return conn.Table<Assessment>().Where(assessment => assessment.CourseId == courseId).ToList();
+            conn.CreateTable<ObjectiveAssessment>();
+            return conn.Update(assessment);
          }
       }
-      public static int AddAssessment(Assessment assessment)
+      public static int UpdateAssessment(PerformanceAssessment assessment)
       {
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
-            conn.CreateTable<Assessment>();
-            return conn.Insert(assessment); 
-            /*
-            if (assessment.Type == "Objective") 
-            {
-               ObjectiveAssessment objAssessment = new ObjectiveAssessment()
-               {
-                  AssessmentId = assessmentId,
-                  PreAssessmentScore = "Not entered",
-                  ScheduledDate = "",
-                  ScheduledDateNotification = false
-               };
-               records_inserted += ObjectiveAssessment.AddAssessment(objAssessment);
-            } else if (assessment.Type == "Performance")
-            {
-               PerformanceAssessment perfAssessment = new PerformanceAssessment()
-               {
-                  AssessmentId = assessmentId,
-               };
-               records_inserted += PerformanceAssessment.AddAssessment(perfAssessment);
-            } */
-         }
-      }
-      public static int UpdateAssessment(Assessment assessment)
-      {
-         using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-         {
-            conn.CreateTable<Assessment>();
+            conn.CreateTable<PerformanceAssessment>();
             return conn.Update(assessment);
          }
       }
@@ -75,61 +56,24 @@ namespace TermTracker.Models
          var deleted = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
+            // Delete from Assessment table in case there's anything in there
             List<Assessment> assessments = conn.Query<Assessment>($"SELECT * FROM Assessment WHERE CourseId=courseId");
             foreach(var assessment in assessments)
             {
                conn.CreateTable<Assessment>();
                deleted += conn.Delete(assessment);
             }
+            deleted += ObjectiveAssessment.DeleteObjAssessment(courseId);
+            deleted += PerformanceAssessment.DeletePerfAssessment(courseId);
             return deleted;
-         }
-      }
-      public static List<string> GetTypes(int courseId)
-      {
-         var availableTypes = new List<string>()
-         {
-            "Performance",
-            "Objective"
-         };
-         var assessments = GetAssessments(courseId);
-         if (assessments.Count == 0)
-         {
-            return availableTypes;
-         }
-         else
-         {
-            foreach (var assessment in assessments)
-            {
-               if (assessment.Type == "Performance")
-               {
-                  availableTypes.Remove("Performance");
-               }
-               else if (assessment.Type == "Objective")
-               {
-                  availableTypes.Remove("Objective");
-               }
-            }
-            return availableTypes;
          }
       }
       public static string CheckNotifications()
       {
          string message = "";
-         using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-         {
-            conn.CreateTable<Assessment>();
-            List<Assessment> notifications = conn.Query<Assessment>($"SELECT * FROM Assessment WHERE DueDateNotification=TRUE;");
-            foreach (var notification in notifications)
-            {
-               double days = DateTime.Parse(notification.DueDate).Subtract(DateTime.Today).TotalDays;
-               if (days <= 7 && days >= 0)
-               {
-                  message += $"{notification.Type} Assessment: {notification.Name} is due {notification.DueDate}\n\n";
-               }
-            }
-            message += ObjectiveAssessment.CheckObjNotifications();
-            return message;
-         }
+         message += PerformanceAssessment.CheckPerfNotifications();
+         message += ObjectiveAssessment.CheckObjNotifications();
+         return message;
       }
    }
 }
