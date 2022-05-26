@@ -13,18 +13,11 @@
                 <Label Text="Assessment Type: " FontSize="Medium"/>
                 <Label Text="{Binding Type}" FontSize="Medium"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Start Date: " FontAttributes="Bold"/>
-                <Label Text="{Binding StartDate}" />
-                <Label Text="End Date: " Margin="35, 0, 0, 0" FontAttributes="Bold"/>
-                <Label Text="{Binding EndDate}"/>
-            </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
                 <Label Text="Due Date: " FontAttributes="Bold"/>
                 <Label Text="{Binding DueDate}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Delete Assessment" Command="{Binding DeleteAssessmentCommand}"/>
                 <Button Text="Edit Assessment" Command="{Binding EditAssessmentCommand}"/>
             </StackLayout>
         </StackLayout>

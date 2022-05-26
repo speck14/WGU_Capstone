@@ -9,8 +9,8 @@ using TermTracker.Views;
 
 namespace TermTracker.ViewModels
 {
-   class EditAssessmentVM : INotifyPropertyChanged
-   {
+   class EditAssessmentVM //: INotifyPropertyChanged
+   {/*
       public event PropertyChangedEventHandler PropertyChanged;
       public Command UpdateAssessmentCommand { get; set; }
 
@@ -151,6 +151,6 @@ namespace TermTracker.ViewModels
                Application.Current.MainPage.DisplayAlert("Error", "Unable to update assessment", "Ok");
             }
          }
-      }
-   }
+      }*/
+   } 
 }

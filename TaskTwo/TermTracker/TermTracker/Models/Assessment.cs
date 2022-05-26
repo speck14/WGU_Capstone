@@ -12,7 +12,6 @@ namespace TermTracker.Models
       public int AssessmentId { get; set; }
       public string Name { get; set; }
       public string Type { get; set; }
-      //public string EndDate { get; set; }
       public string DueDate { get; set; }
       public bool DueDateNotification { get; set; }
       public int CourseId { get; set; }
@@ -41,7 +40,26 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Assessment>();
-            return conn.Insert(assessment);
+            return conn.Insert(assessment); 
+            /*
+            if (assessment.Type == "Objective") 
+            {
+               ObjectiveAssessment objAssessment = new ObjectiveAssessment()
+               {
+                  AssessmentId = assessmentId,
+                  PreAssessmentScore = "Not entered",
+                  ScheduledDate = "",
+                  ScheduledDateNotification = false
+               };
+               records_inserted += ObjectiveAssessment.AddAssessment(objAssessment);
+            } else if (assessment.Type == "Performance")
+            {
+               PerformanceAssessment perfAssessment = new PerformanceAssessment()
+               {
+                  AssessmentId = assessmentId,
+               };
+               records_inserted += PerformanceAssessment.AddAssessment(perfAssessment);
+            } */
          }
       }
       public static int UpdateAssessment(Assessment assessment)
@@ -52,12 +70,18 @@ namespace TermTracker.Models
             return conn.Update(assessment);
          }
       }
-      public static int DeleteAssessment(Assessment assessment)
+      public static int DeleteAssessments(int courseId)
       {
+         var deleted = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
-            conn.CreateTable<Assessment>();
-            return conn.Delete(assessment);
+            List<Assessment> assessments = conn.Query<Assessment>($"SELECT * FROM Assessment WHERE CourseId=courseId");
+            foreach(var assessment in assessments)
+            {
+               conn.CreateTable<Assessment>();
+               deleted += conn.Delete(assessment);
+            }
+            return deleted;
          }
       }
       public static List<string> GetTypes(int courseId)
@@ -103,7 +127,7 @@ namespace TermTracker.Models
                   message += $"{notification.Type} Assessment: {notification.Name} is due {notification.DueDate}\n\n";
                }
             }
-            message += ObjectiveAssessment.CheckNotifications();
+            message += ObjectiveAssessment.CheckObjNotifications();
             return message;
          }
       }

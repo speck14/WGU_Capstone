@@ -47,9 +47,14 @@ namespace TermTracker.Models
          }
       }
       public static int DeleteTerm(Term term)
-      {
+      {  
          using(SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
+            var courses = Course.GetCourses(term.TermId);
+            foreach(var course in courses)
+            {
+               Course.DeleteCourse(course);
+            }
             conn.CreateTable<Term>();
             return conn.Delete(term);
          }

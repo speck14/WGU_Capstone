@@ -18,7 +18,6 @@ namespace TermTracker
       public TermsView()
       {
          InitializeComponent();
-
          ViewModel = Resources["vm"] as TermsVM;
       }
       protected override void OnAppearing()
@@ -37,6 +36,7 @@ namespace TermTracker
       {
          string notificationText = "";
          notificationText += Assessment.CheckNotifications();
+         notificationText += ObjectiveAssessment.CheckObjNotifications();
          notificationText += Course.CheckNotifications();
 
          if (!String.IsNullOrEmpty(notificationText))
