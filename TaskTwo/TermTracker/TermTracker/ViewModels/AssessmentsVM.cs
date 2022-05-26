@@ -41,10 +41,18 @@ namespace TermTracker.ViewModels
             Assessments.Add(per_assessment);
          }
       }
-      public static void OnAppearing(int courseId, ListView assessmentView)
+      public static void OnAppearing(int courseId, ListView objAssessmentView, ListView perfAssessmentView)
       {
-         assessmentView.ItemsSource = ObjectiveAssessment.GetObjAssessments(courseId);
-         //assessmentView.
+         var objAssessments = ObjectiveAssessment.GetObjAssessments(courseId);
+         foreach(var assessment in objAssessments)
+         {
+            if(String.IsNullOrEmpty(assessment.ScheduledDate))
+            {
+               assessment.ScheduledDate = "Not scheduled";
+            }
+         }
+         objAssessmentView.ItemsSource = objAssessments;
+         perfAssessmentView.ItemsSource = PerformanceAssessment.GetPerfAssessments(courseId);
       }
    }
 }

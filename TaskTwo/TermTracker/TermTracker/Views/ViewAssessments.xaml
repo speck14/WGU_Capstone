@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
-                <ListView x:Name="CourseAssessments_ListView" ItemSelected="CourseAssessments_ListView_ItemSelected" HasUnevenRows="True">
+                <ListView x:Name="CourseAssessments_PerfListView" ItemSelected="CourseAssessments_PerfListView_ItemSelected" HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -24,6 +24,33 @@
                                     <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
                                         <Label Text="Due Date: " FontAttributes="Bold"/>
                                         <Label Text="{Binding DueDate}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView x:Name="CourseAssessments_ObjListView" ItemSelected="CourseAssessments_ObjListView_ItemSelected" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="10, 5, 0, 10">
+                                    <StackLayout HorizontalOptions="Center">
+                                        <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Label Text="Assessment Type: " FontSize="Medium"/>
+                                        <Label Text="{Binding Type}" FontSize="Medium"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
+                                        <Label Text="Due Date: " FontAttributes="Bold"/>
+                                        <Label Text="{Binding DueDate}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
+                                        <Label Text="Scheduled Date: " FontAttributes="Bold"/>
+                                        <Label x:Name="scheduledDate" Text="{Binding ScheduledDate}"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>
