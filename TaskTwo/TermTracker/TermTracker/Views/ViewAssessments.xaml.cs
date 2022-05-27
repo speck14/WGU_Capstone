@@ -24,21 +24,20 @@ namespace TermTracker.Views
       {
          base.OnAppearing();
          AssessmentsVM.OnAppearing(currentCourse.CourseId, CourseAssessments_ObjListView, CourseAssessments_PerfListView);
-         var scheduledDate = this.FindByName<Label>("scheduledDate");
       }
 
       private void CourseAssessments_PerfListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
       {
          if (CourseAssessments_PerfListView.SelectedItem is PerformanceAssessment currentAssessment)
          {
-            //Navigation.PushAsync(new AssessmentView(currentAssessment));
+            Navigation.PushAsync(new AssessmentView(currentAssessment));
          }
       }
       private void CourseAssessments_ObjListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
       {
          if (CourseAssessments_ObjListView.SelectedItem is ObjectiveAssessment currentAssessment)
          {
-            //Navigation.PushAsync(new AssessmentView(currentAssessment));
+            Navigation.PushAsync(new ObjectiveAssessmentView(currentAssessment));
          }
       }
    }

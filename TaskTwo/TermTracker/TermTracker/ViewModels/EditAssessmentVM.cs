@@ -9,12 +9,13 @@ using TermTracker.Views;
 
 namespace TermTracker.ViewModels
 {
-   class EditAssessmentVM //: INotifyPropertyChanged
-   {/*
+   class EditAssessmentVM : INotifyPropertyChanged
+   {
       public event PropertyChangedEventHandler PropertyChanged;
       public Command UpdateAssessmentCommand { get; set; }
 
-      public Assessment currentAssessment;
+      public PerformanceAssessment currentPerfAssessment;
+      public ObjectiveAssessment currentObjAssessment;
       private int assessmentId;
 
       private string name;
@@ -35,26 +36,6 @@ namespace TermTracker.ViewModels
          {
             type = value;
             OnPropertyChanged("Type");
-         }
-      }
-      private DateTime startDate;
-      public DateTime StartDate
-      {
-         get { return startDate; }
-         set
-         {
-            startDate = value;
-            OnPropertyChanged("StartDate");
-         }
-      }
-      private DateTime endDate;
-      public DateTime EndDate
-      {
-         get { return endDate; }
-         set
-         {
-            endDate = value;
-            OnPropertyChanged("EndDate");
          }
       }
       private DateTime dueDate;
@@ -87,21 +68,74 @@ namespace TermTracker.ViewModels
             OnPropertyChanged("TermId");
          }
       }
-
-      public EditAssessmentVM(Assessment currentAssessment)
+      private string preAssessmentScore;
+      public string PreAssessmentScore
       {
-         this.currentAssessment = currentAssessment;
+         get { return preAssessmentScore; }
+         set
+         {
+            preAssessmentScore = value;
+            OnPropertyChanged("PreAssessmentScore");
+         }
+      }
+      private string scheduledDate;
+      public string ScheduledDate
+      {
+         get { return scheduledDate; }
+         set
+         {
+            scheduledDate = value;
+            OnPropertyChanged("ScheduledDate");
+         }
+      }
+      private string scheduledTime;
+      public string ScheduledTime
+      {
+         get { return scheduledTime; }
+         set
+         {
+            scheduledTime = value;
+            OnPropertyChanged("ScheduledTime");
+         }
+      }
+      private bool scheduledDateNotification;
+      public bool ScheduledDateNotification
+      {
+         get { return scheduledDateNotification; }
+         set
+         {
+            dueDateNotification = value;
+            OnPropertyChanged("ScheduledDateNotificaton");
+         }
+      }
+      public EditAssessmentVM(PerformanceAssessment currentAssessment)
+      {
+         this.currentPerfAssessment = currentAssessment;
          courseId = currentAssessment.CourseId;
          assessmentId = currentAssessment.AssessmentId;
          name = currentAssessment.Name;
          type = currentAssessment.Type;
-         startDate = DateTime.Parse(currentAssessment.StartDate);
-         endDate = DateTime.Parse(currentAssessment.EndDate);
          dueDate = DateTime.Parse(currentAssessment.DueDate);
          dueDateNotification = currentAssessment.DueDateNotification;
 
          UpdateAssessmentCommand = new Command(Update);
+      }
 
+      public EditAssessmentVM(ObjectiveAssessment currentAssessment)
+      {
+         currentObjAssessment = currentAssessment;
+         courseId = currentAssessment.CourseId;
+         assessmentId = currentAssessment.AssessmentId;
+         name = currentAssessment.Name;
+         type = currentAssessment.Type;
+         dueDate = DateTime.Parse(currentAssessment.DueDate);
+         dueDateNotification = currentAssessment.DueDateNotification;
+         preAssessmentScore = currentAssessment.PreAssessmentScore;
+         scheduledDate = currentAssessment.ScheduledDate;
+         scheduledTime = currentAssessment.ScheduledTime;
+         scheduledDateNotification = currentAssessment.ScheduledDateNotification;
+
+         UpdateAssessmentCommand = new Command(Update);
       }
 
       public static void SetCourseId(int id)
@@ -114,43 +148,76 @@ namespace TermTracker.ViewModels
       }
       public void Update()
       {
-         if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type))
+         if(currentPerfAssessment != null)
          {
-            Application.Current.MainPage.DisplayAlert("Error", "No fields except Notes can be empty.", "Ok");
-         }
-         else if (startDate > endDate || startDate > dueDate)
-         {
-            Application.Current.MainPage.DisplayAlert("Error", "Start date can't be after end date or due date.", "Ok");
-         }
-         else if (endDate > dueDate)
-         {
-            Application.Current.MainPage.DisplayAlert("Error", "Expected course end date can't be after due date.", "Ok");
-         }
-         else
-         {
-            Assessment assessment = new Assessment()
+            if (string.IsNullOrEmpty(name))
             {
-               AssessmentId = assessmentId,
-               Name = name,
-               Type = type,
-               StartDate = startDate.ToString("MM-dd-yyyy"),
-               EndDate = endDate.ToString("MM-dd-yyyy"),
-               DueDate = dueDate.ToString("MM-dd-yyyy"),
-               DueDateNotification = dueDateNotification,
-               CourseId = courseId
-            };
-            currentAssessment = assessment;
-            int updated = Assessment.UpdateAssessment(assessment);
-            if (updated > 0)
-            {
-               MessagingCenter.Send(this, "EditAssessment");
-               Application.Current.MainPage.Navigation.PopAsync();
+               Application.Current.MainPage.DisplayAlert("Error", "No fields can be empty.", "Ok");
             }
             else
             {
-               Application.Current.MainPage.DisplayAlert("Error", "Unable to update assessment", "Ok");
+               PerformanceAssessment assessment = new PerformanceAssessment()
+               {
+                  AssessmentId = assessmentId,
+                  Name = name,
+                  Type = type,
+                  DueDate = dueDate.ToString("MM-dd-yyyy"),
+                  DueDateNotification = dueDateNotification,
+                  CourseId = courseId
+               };
+               currentPerfAssessment = assessment;
+               int updated = Assessment.UpdateAssessment(assessment);
+               if (updated > 0)
+               {
+                  MessagingCenter.Send(this, "EditAssessment");
+                  Application.Current.MainPage.Navigation.PopAsync();
+               }
+               else
+               {
+                  Application.Current.MainPage.DisplayAlert("Error", "Unable to update assessment", "Ok");
+               }
             }
          }
-      }*/
+         if (currentObjAssessment != null)
+         {
+            if (string.IsNullOrEmpty(name))
+            {
+               Application.Current.MainPage.DisplayAlert("Error", "No fields except PreAssessment can be empty.", "Ok");
+            }
+            else
+            {
+               ObjectiveAssessment assessment = new ObjectiveAssessment()
+               {
+                  AssessmentId = assessmentId,
+                  Name = name,
+                  Type = type,
+                  DueDate = dueDate.ToString("MM-dd-yyyy"),
+                  DueDateNotification = dueDateNotification,
+                  CourseId = courseId,
+                  PreAssessmentScore = preAssessmentScore,
+                  ScheduledDate = scheduledDate,
+                  ScheduledTime = scheduledTime.ToString(),
+                  ScheduledDateNotification = scheduledDateNotification
+               };
+               if (EditObjAssessment.scheduled_change == false)
+               {
+                  assessment.ScheduledDate = currentObjAssessment.ScheduledDate;
+                  assessment.ScheduledTime = currentObjAssessment.ScheduledTime;
+               }
+               currentObjAssessment = assessment;
+               int updated = Assessment.UpdateAssessment(assessment);
+               if (updated > 0)
+               {
+                  MessagingCenter.Send(this, "EditAssessment");
+                  Application.Current.MainPage.Navigation.PopAsync();
+               }
+               else
+               {
+                  Application.Current.MainPage.DisplayAlert("Error", "Unable to update assessment", "Ok");
+               }
+            }
+         }
+
+      }
    } 
 }

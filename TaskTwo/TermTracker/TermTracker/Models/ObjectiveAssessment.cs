@@ -10,12 +10,14 @@ namespace TermTracker.Models
    {
       public string PreAssessmentScore { get; set; }
       public string ScheduledDate { get; set; }
+      public string ScheduledTime { get; set; }
       public bool ScheduledDateNotification { get; set; }
       public ObjectiveAssessment() { }
-      public ObjectiveAssessment(string PreAssessmentScore, string ScheduledDate, bool ScheduledDateNotification)
+      public ObjectiveAssessment(string PreAssessmentScore, string ScheduledDate, string ScheduledTime, bool ScheduledDateNotification)
       {
          PreAssessmentScore = this.PreAssessmentScore;
          ScheduledDate = this.ScheduledDate;
+         ScheduledTime = this.ScheduledTime;
          ScheduledDateNotification = this.ScheduledDateNotification;
       }
       public static int AddObjAssessment(ObjectiveAssessment assessment)
@@ -56,7 +58,6 @@ namespace TermTracker.Models
                return conn.Delete(assessment);
             }
       }
-
       public static string CheckObjNotifications()
       {
          var message = "";

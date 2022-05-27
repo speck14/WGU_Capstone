@@ -50,7 +50,8 @@
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
                                         <Label Text="Scheduled Date: " FontAttributes="Bold"/>
-                                        <Label x:Name="scheduledDate" Text="{Binding ScheduledDate}"/>
+                                        <Label Text="{Binding ScheduledDate }"/>
+                                        <Label Text="{Binding ScheduledTime }"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>

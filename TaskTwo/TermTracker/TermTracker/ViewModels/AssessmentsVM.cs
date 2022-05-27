@@ -9,9 +9,9 @@ using TermTracker.Views;
 
 namespace TermTracker.ViewModels
 {
-   public class AssessmentsVM// : INotifyPropertyChanged
+   public class AssessmentsVM : INotifyPropertyChanged
    { 
-     // public event PropertyChangedEventHandler PropertyChanged;
+      public event PropertyChangedEventHandler PropertyChanged;
       public Command ViewAssessmentCommand { get; set; }
       public Command SetNotificationCommand { get; set; }
 
@@ -44,13 +44,6 @@ namespace TermTracker.ViewModels
       public static void OnAppearing(int courseId, ListView objAssessmentView, ListView perfAssessmentView)
       {
          var objAssessments = ObjectiveAssessment.GetObjAssessments(courseId);
-         foreach(var assessment in objAssessments)
-         {
-            if(String.IsNullOrEmpty(assessment.ScheduledDate))
-            {
-               assessment.ScheduledDate = "Not scheduled";
-            }
-         }
          objAssessmentView.ItemsSource = objAssessments;
          perfAssessmentView.ItemsSource = PerformanceAssessment.GetPerfAssessments(courseId);
       }

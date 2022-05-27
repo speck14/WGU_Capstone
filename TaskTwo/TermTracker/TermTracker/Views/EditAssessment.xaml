@@ -12,13 +12,6 @@
                 <Picker x:Name="TypePicker" SelectedItem="{Binding Path=Type}" />
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 5">
-                <Label Text="Start Date: " />
-                <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=StartDate}"/>
-                <Label Text="End Date: " />
-                <DatePicker MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=EndDate}"/>
-            </StackLayout>
-
             <StackLayout Margin="10, 0, 0, 5">
                 <Label Text="Due Date: "/>
                 <DatePicker  MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=DueDate}" />

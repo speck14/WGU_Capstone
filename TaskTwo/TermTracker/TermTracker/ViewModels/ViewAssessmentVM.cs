@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using TermTracker.Models;
 using TermTracker.Views;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace TermTracker.ViewModels
 {
@@ -14,7 +15,8 @@ namespace TermTracker.ViewModels
       public event PropertyChangedEventHandler PropertyChanged;
       public Command EditAssessmentCommand { get; set; }
 
-      public Assessment currentAssessment;
+      public ObjectiveAssessment currentObjAssessment;
+      public PerformanceAssessment currentPerfAssessment;
 
       private int assessmentId;
       public int AssessmentId
@@ -43,10 +45,19 @@ namespace TermTracker.ViewModels
          set
          {
             name = value;
-            OnPropertyChanged("Name");
+            OnPropertyChanged("Type");
          }
       }
-
+      private string preAssessmentScore;
+      public string PreAssessmentScore
+      {
+         get { return preAssessmentScore; }
+         set
+         {
+            preAssessmentScore = value;
+            OnPropertyChanged("PreAssessmentScore");
+         }
+      }
       private string dueDate;
       public string DueDate
       {
@@ -67,9 +78,54 @@ namespace TermTracker.ViewModels
             OnPropertyChanged("DueDateNotificaton");
          }
       }
-      public ViewAssessmentVM(Assessment currentAssessment)
+      private string scheduledDate;
+      public string ScheduledDate
       {
-         this.currentAssessment = currentAssessment;
+         get { return scheduledDate; }
+         set
+         {
+            scheduledDate = value;
+            OnPropertyChanged("ScheduledDate");
+         }
+      }
+      private string scheduledTime;
+      public string ScheduledTime
+      {
+         get { return scheduledTime; }
+         set
+         {
+            scheduledDate = value;
+            OnPropertyChanged("ScheduledTime");
+         }
+      }
+      private bool scheduledDateNotification;
+      public bool ScheduledDateNotification
+      {
+         get { return scheduledDateNotification; }
+         set
+         {
+            dueDateNotification = value;
+            OnPropertyChanged("ScheduledDateNotificaton");
+         }
+      }
+      public ViewAssessmentVM(ObjectiveAssessment currentAssessment)
+      {
+         this.currentObjAssessment = currentAssessment;
+         this.assessmentId = currentAssessment.AssessmentId;
+         this.name = currentAssessment.Name;
+         this.type = currentAssessment.Type;
+         this.dueDate = currentAssessment.DueDate;
+         this.dueDateNotification = currentAssessment.DueDateNotification;
+         this.preAssessmentScore = currentAssessment.PreAssessmentScore;
+         this.scheduledDate = currentAssessment.ScheduledDate;
+         this.scheduledTime = currentAssessment.ScheduledTime;
+         this.scheduledDateNotification = currentAssessment.ScheduledDateNotification;
+
+         EditAssessmentCommand = new Command(EditAssessment);
+      }
+      public ViewAssessmentVM(PerformanceAssessment currentAssessment)
+      {
+         currentPerfAssessment = currentAssessment;
          this.assessmentId = currentAssessment.AssessmentId;
          this.name = currentAssessment.Name;
          this.type = currentAssessment.Type;
@@ -84,19 +140,37 @@ namespace TermTracker.ViewModels
       }
       public void EditAssessment()
       {
-         /*MessagingCenter.Subscribe<EditAssessmentVM>(this, "EditAssessment", (sender) =>
+         if(currentObjAssessment != null && currentObjAssessment.Type == "Objective")
          {
-            currentAssessment = sender.currentAssessment;
-            name = sender.Name;
-            type = sender.Type;
-            startDate = sender.StartDate.ToString("MM-dd-yyyy");
-            endDate = sender.EndDate.ToString("MM-dd-yyyy");
-            dueDate = sender.DueDate.ToString("MM-dd-yyyy");
-            dueDateNotification = sender.DueDateNotification;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
-         });
-         Application.Current.MainPage.Navigation.PushAsync(new EditAssessment(currentAssessment));
-         */
+            MessagingCenter.Subscribe<EditAssessmentVM>(this, "EditAssessment", (sender) =>
+            {
+               currentObjAssessment = sender.currentObjAssessment;
+               name = sender.Name;
+               type = sender.Type;
+               dueDate = sender.DueDate.ToString("MM-dd-yyyy");
+               dueDateNotification = sender.DueDateNotification;
+               preAssessmentScore = sender.PreAssessmentScore;
+               scheduledDate = sender.ScheduledDate;
+               scheduledTime = sender.ScheduledTime;
+               scheduledDateNotification = sender.ScheduledDateNotification;
+               PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+            });
+            Application.Current.MainPage.Navigation.PushAsync(new EditObjAssessment(currentObjAssessment));
+         }
+         else if(currentPerfAssessment != null && currentPerfAssessment.Type == "Performance")
+         {
+            MessagingCenter.Subscribe<EditAssessmentVM>(this, "EditAssessment", (sender) =>
+            {
+               currentPerfAssessment = sender.currentPerfAssessment;
+               name = sender.Name;
+               type = sender.Type;
+               dueDate = sender.DueDate.ToString("MM-dd-yyyy");
+               dueDateNotification = sender.DueDateNotification;
+               PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+            });
+            Application.Current.MainPage.Navigation.PushAsync(new EditAssessment(currentPerfAssessment));
+         }
+
       }
    }
 }

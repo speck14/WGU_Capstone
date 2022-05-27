@@ -49,3 +49,5 @@ C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debu
 C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\TermTracker.dll
 C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\ref\TermTracker.dll
 C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\TermTracker.pdb
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\ObjectiveAssessmentView.xaml.g.cs
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\EditObjAssessment.xaml.g.cs

@@ -9,12 +9,13 @@ using TermTracker.Models;
 using TermTracker.ViewModels;
 using TermTracker.Views;
 
+
 namespace TermTracker.Views
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class AssessmentView : ContentPage
+   public partial class ObjectiveAssessmentView : ContentPage
    {
-      public AssessmentView(PerformanceAssessment currentAssessment)
+      public ObjectiveAssessmentView(ObjectiveAssessment currentAssessment)
       {
          InitializeComponent();
          BindingContext = new ViewAssessmentVM(currentAssessment);

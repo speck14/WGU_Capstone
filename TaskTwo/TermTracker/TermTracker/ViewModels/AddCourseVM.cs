@@ -204,7 +204,8 @@ namespace TermTracker.ViewModels
                   DueDateNotification = false,
                   CourseId = response,
                   PreAssessmentScore = "Not entered",
-                  ScheduledDate = "",
+                  ScheduledDate = "Not scheduled",
+                  ScheduledTime = "00:00",
                   ScheduledDateNotification = false
                };
                PerformanceAssessment performanceAssessment = new PerformanceAssessment()

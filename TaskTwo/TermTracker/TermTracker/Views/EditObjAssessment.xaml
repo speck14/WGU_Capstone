@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TermTracker.Views.EditObjAssessment">
+    <ContentPage.Content>
+            <StackLayout>
+            <StackLayout Margin="10, 0, 0, 10">
+                <Entry Placeholder="{Binding Name}" Text="{Binding Path=Name}" FontSize="Large"/>
+            </StackLayout>
+
+            <StackLayout Margin="10, 0, 0, 10">
+                <Label Text="PreAssessment Score: "/>
+                <Entry Placeholder="{Binding PreAssessmentScore}" Text="{Binding Path=PreAssessmentScore}" />
+            </StackLayout>
+
+            <StackLayout Margin="10, 0, 0, 5">
+                <Label Text="Scheduled Date: "/>
+                <DatePicker PropertyChanged="DatePicker_PropertyChanged" MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=ScheduledDate}" />
+                <Label Text="Scheduled Time: "/>
+                <TimePicker PropertyChanged="TimePicker_PropertyChanged" Time="{Binding Path=ScheduledTime}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Switch OnColor="Green" ThumbColor="Gray" IsToggled="{Binding Path=ScheduledDateNotification}"/>
+                <Label Text="Scheduled Date Notification"/>
+            </StackLayout>
+
+            <StackLayout Margin="10, 0, 0, 5">
+                    <Label Text="Due Date: "/>
+                    <DatePicker  MinimumDate="01/01/2022" MaximumDate="12/31/2032" Date="{Binding Path=DueDate}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Switch OnColor="Green" ThumbColor="Gray" IsToggled="{Binding Path=DueDateNotification}"/>
+                    <Label Text="Due Date Notification"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Update Assessment" Command="{Binding Path=UpdateAssessmentCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ContentPage.Content>
+</ContentPage>

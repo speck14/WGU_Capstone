@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:TermTracker.ViewModels"
-             x:Class="TermTracker.Views.AssessmentView">
+             x:Class="TermTracker.Views.ObjectiveAssessmentView">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout HorizontalOptions="Center">
@@ -14,8 +14,17 @@
                 <Label Text="{Binding Type}" FontSize="Medium"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
+                <Label Text="Scheduled Date: " FontAttributes="Bold"/>
+                <Label Text="{Binding ScheduledDate}"/>
+                <Label Text="{Binding ScheduledTime}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
                 <Label Text="Due Date: " FontAttributes="Bold"/>
                 <Label Text="{Binding DueDate}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0" HorizontalOptions="Center">
+                <Label Text="PreAssessment Score: " FontSize="Medium"/>
+                <Label Text="{Binding PreAssessmentScore}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="Edit Assessment" Command="{Binding EditAssessmentCommand}"/>
