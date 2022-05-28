@@ -77,6 +77,14 @@ namespace TermTracker.Models
             return conn.Table<Course>().Where(course => course.TermId == termId).ToList();
          }
       }
+      public static List<Course> SearchCourses(string searchString)
+      {
+         using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+         {
+            conn.CreateTable<Course>();
+            return conn.Table<Course>().Where(course => course.Name.ToLower().Contains(searchString) ).ToList();
+         }
+      }
       public static int AddCourse(Course course)
       {
          var courseId = 0;
@@ -134,7 +142,6 @@ namespace TermTracker.Models
                   
                }
             }
-            Console.WriteLine(message);
             return message;
          }
       }

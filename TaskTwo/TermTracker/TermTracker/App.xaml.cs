@@ -8,6 +8,8 @@ using Xamarin.Forms.Xaml;
       - Inheritance: ObjectiveAssessment and PerformanceAssessment are both derived classes of the Assessment parent class
       - Polymorphism: occurs in: TermsView, AddAssessment view, AddCourse view, CourseView, EditAssessment, ViewAssessments, and ViewwTerm, when the OnAppearing() method is overridden to redefine the functionality of the parent class 
          - in the case of the above classes, the parent is the ContentPage class
+         - There is also Polymorphism present in the implementation of the ObjectiveAssessment and PerformanceAssessment derived classes
+      - Search functionality: search for courses by name
  */
 
 namespace TermTracker

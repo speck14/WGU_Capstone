@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TermTracker.Views.CourseSearch">
+    <ContentPage.Content>
+        <StackLayout >
+            <Label Margin="10, 0, 0, 10" Text="Enter search terms: " FontSize="Medium"/>
+            <Entry Margin="10, 0, 0, 10" Placeholder="Course  search" Text="{Binding SearchTerms}" />
+            <Button Margin="10, 0, 0, 10" Text="Search" Command="{Binding Path=SearchCoursesCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

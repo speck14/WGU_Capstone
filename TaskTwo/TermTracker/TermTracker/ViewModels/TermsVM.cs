@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
@@ -14,6 +13,7 @@ namespace TermTracker.ViewModels
    {
       public Command AddTermCommand { get; set; }
       public Command ViewTermCommand { get; set; }
+      public Command SearchCourseCommand { get; set; }
 
       public ObservableCollection<Term> Terms
       {
@@ -24,6 +24,7 @@ namespace TermTracker.ViewModels
       {
          Terms = new ObservableCollection<Term>();
          AddTermCommand = new Command(AddTerm);
+         SearchCourseCommand = new Command(SearchCourseRedirect);
 
          GetTerms();
       }
@@ -42,6 +43,10 @@ namespace TermTracker.ViewModels
       public void AddTerm()
       {
          Application.Current.MainPage.Navigation.PushAsync(new AddTerm());
+      }
+      public void SearchCourseRedirect()
+      {
+         Application.Current.MainPage.Navigation.PushAsync(new CourseSearch());
       }
    }
 }

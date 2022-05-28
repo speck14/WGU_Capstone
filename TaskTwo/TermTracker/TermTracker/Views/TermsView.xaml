@@ -15,6 +15,10 @@
                      x:Name="Add_Term"
                      Command="{Binding Source={StaticResource vm}, Path=AddTermCommand}"
                      />
+        <ToolbarItem Text="Search Courses"
+                     x:Name="Course_Search"
+                     Command="{Binding Source={StaticResource vm}, Path=SearchCourseCommand}"
+                     />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

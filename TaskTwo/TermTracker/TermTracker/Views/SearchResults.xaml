@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TermTracker.ViewModels"
+             x:Class="TermTracker.Views.SearchResults">
+    <ContentPage.Resources>
+            <ResourceDictionary>
+                <vm:CourseSearchVM x:Key="vm" />
+            </ResourceDictionary>
+        </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout x:Name="search_stack">
+            <ListView x:Name="Courses_ListView" ItemSelected="Courses_ListView_ItemSelected" ItemsSource="{Binding Source={StaticResource vm}, Path=Courses}" HasUnevenRows="True" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                                <StackLayout Margin="10, 5, 0, 10">
+                                    <StackLayout Orientation="Horizontal" >
+                                        <Label Text="{Binding Name}" FontSize="Title"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Status:" Margin="240, 0, 0, 0"/>
+                                        <Label Text="{Binding Status}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding StartDate}"/>
+                                        <Label Text=" - "/>
+                                        <Label Text="{Binding EndDate}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
