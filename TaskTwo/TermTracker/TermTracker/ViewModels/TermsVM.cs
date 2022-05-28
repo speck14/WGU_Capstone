@@ -14,6 +14,7 @@ namespace TermTracker.ViewModels
       public Command AddTermCommand { get; set; }
       public Command ViewTermCommand { get; set; }
       public Command SearchCourseCommand { get; set; }
+      public Command ReportsCommand { get; set; }
 
       public ObservableCollection<Term> Terms
       {
@@ -25,6 +26,7 @@ namespace TermTracker.ViewModels
          Terms = new ObservableCollection<Term>();
          AddTermCommand = new Command(AddTerm);
          SearchCourseCommand = new Command(SearchCourseRedirect);
+         ReportsCommand = new Command(ViewReportsRedirect);
 
          GetTerms();
       }
@@ -47,6 +49,10 @@ namespace TermTracker.ViewModels
       public void SearchCourseRedirect()
       {
          Application.Current.MainPage.Navigation.PushAsync(new CourseSearch());
+      }
+      public void ViewReportsRedirect()
+      {
+         Application.Current.MainPage.Navigation.PushAsync(new CreateReports());
       }
    }
 }

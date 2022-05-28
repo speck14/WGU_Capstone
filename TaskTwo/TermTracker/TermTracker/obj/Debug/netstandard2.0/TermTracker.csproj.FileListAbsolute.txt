@@ -53,3 +53,5 @@ C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debu
 C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\EditObjAssessment.xaml.g.cs
 C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\CourseSearch.xaml.g.cs
 C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\SearchResults.xaml.g.cs
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\CreateReports.xaml.g.cs
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker\obj\Debug\netstandard2.0\Views\ReportResults.xaml.g.cs
