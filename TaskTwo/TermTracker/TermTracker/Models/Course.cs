@@ -87,7 +87,6 @@ namespace TermTracker.Models
             List <Course> just_added = conn.Query<Course>($"SELECT * FROM Course ORDER BY courseId DESC LIMIT 1");
             foreach(var record in just_added) 
             {
-               Console.WriteLine(record.CourseId);
                courseId = record.CourseId;
             }
             return courseId;

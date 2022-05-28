@@ -170,6 +170,7 @@ namespace TermTracker.ViewModels
                if (updated > 0)
                {
                   MessagingCenter.Send(this, "EditAssessment");
+                  currentPerfAssessment = null;
                   Application.Current.MainPage.Navigation.PopAsync();
                }
                else
@@ -208,6 +209,7 @@ namespace TermTracker.ViewModels
                if (updated > 0)
                {
                   MessagingCenter.Send(this, "EditAssessment");
+                  currentObjAssessment = null;
                   Application.Current.MainPage.Navigation.PopAsync();
                }
                else
