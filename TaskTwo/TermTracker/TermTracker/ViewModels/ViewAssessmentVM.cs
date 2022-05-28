@@ -150,7 +150,7 @@ namespace TermTracker.ViewModels
                dueDate = sender.DueDate.ToString("MM-dd-yyyy");
                dueDateNotification = sender.DueDateNotification;
                preAssessmentScore = sender.PreAssessmentScore;
-               scheduledDate = sender.ScheduledDate;
+               scheduledDate = sender.ScheduledDate.ToString("MM-dd-yyyy");
                scheduledTime = sender.ScheduledTime;
                scheduledDateNotification = sender.ScheduledDateNotification;
                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));

@@ -14,28 +14,28 @@ namespace TermTracker.Views
    public partial class EditObjAssessment : ContentPage
    {
       private int courseId;
-      public static bool scheduled_change = false;
+      ObjectiveAssessment currentAssessment;
       public EditObjAssessment(ObjectiveAssessment currentAssessment)
       {
          InitializeComponent();
          this.courseId = currentAssessment.CourseId;
          this.BindingContext = new EditAssessmentVM(currentAssessment);
+         this.currentAssessment = currentAssessment;
+         CheckScheduled();
       }
-
+      private void CheckScheduled()
+      {
+         // If the exam hasn't been scheduled yet
+         if (currentAssessment.ScheduledTime == "00:00" && currentAssessment.ScheduledDate == currentAssessment.DueDate)
+         {
+            var scheduled_stack = this.FindByName<StackLayout>("schedule_stack");
+            scheduled_stack.Children.Add(new Label { Text = "Exam not yet scheduled", TextColor = new Color(255, 0, 0) });
+         }
+      }
       protected override void OnAppearing()
       {
          base.OnAppearing();
          EditAssessmentVM.SetCourseId(courseId);
-      }
-
-      private void DatePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-      {
-         scheduled_change = true;
-      }
-
-      private void TimePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-      {
-         scheduled_change = true;
       }
    }
 }

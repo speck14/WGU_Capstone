@@ -78,8 +78,8 @@ namespace TermTracker.ViewModels
             OnPropertyChanged("PreAssessmentScore");
          }
       }
-      private string scheduledDate;
-      public string ScheduledDate
+      private DateTime scheduledDate;
+      public DateTime ScheduledDate
       {
          get { return scheduledDate; }
          set
@@ -104,8 +104,8 @@ namespace TermTracker.ViewModels
          get { return scheduledDateNotification; }
          set
          {
-            dueDateNotification = value;
-            OnPropertyChanged("ScheduledDateNotificaton");
+            scheduledDateNotification = value;
+            OnPropertyChanged("ScheduledDateNotification");
          }
       }
       public EditAssessmentVM(PerformanceAssessment currentAssessment)
@@ -131,7 +131,7 @@ namespace TermTracker.ViewModels
          dueDate = DateTime.Parse(currentAssessment.DueDate);
          dueDateNotification = currentAssessment.DueDateNotification;
          preAssessmentScore = currentAssessment.PreAssessmentScore;
-         scheduledDate = currentAssessment.ScheduledDate;
+         scheduledDate = DateTime.Parse(currentAssessment.ScheduledDate);
          scheduledTime = currentAssessment.ScheduledTime;
          scheduledDateNotification = currentAssessment.ScheduledDateNotification;
 
@@ -184,6 +184,10 @@ namespace TermTracker.ViewModels
             {
                Application.Current.MainPage.DisplayAlert("Error", "No fields except PreAssessment can be empty.", "Ok");
             }
+            else if (!Validation.IsValidTime(scheduledTime))
+            {
+               Application.Current.MainPage.DisplayAlert("Error", "Time should be entered using the 24-hour clock, using the following format: HH:mm", "Ok");
+            }
             else
             {
                ObjectiveAssessment assessment = new ObjectiveAssessment()
@@ -195,15 +199,10 @@ namespace TermTracker.ViewModels
                   DueDateNotification = dueDateNotification,
                   CourseId = courseId,
                   PreAssessmentScore = preAssessmentScore,
-                  ScheduledDate = scheduledDate,
-                  ScheduledTime = scheduledTime.ToString(),
+                  ScheduledDate = scheduledDate.ToString("MM-dd-yyyy"),
+                  ScheduledTime = scheduledTime,
                   ScheduledDateNotification = scheduledDateNotification
                };
-               if (EditObjAssessment.scheduled_change == false)
-               {
-                  assessment.ScheduledDate = currentObjAssessment.ScheduledDate;
-                  assessment.ScheduledTime = currentObjAssessment.ScheduledTime;
-               }
                currentObjAssessment = assessment;
                int updated = Assessment.UpdateAssessment(assessment);
                if (updated > 0)

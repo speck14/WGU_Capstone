@@ -36,7 +36,6 @@ namespace TermTracker
       {
          string notificationText = "";
          notificationText += Assessment.CheckNotifications();
-         notificationText += ObjectiveAssessment.CheckObjNotifications();
          notificationText += Course.CheckNotifications();
 
          if (!String.IsNullOrEmpty(notificationText))

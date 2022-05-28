@@ -7,10 +7,6 @@
             <StackLayout Margin="10, 0, 0, 10">
                 <Entry Placeholder="{Binding Name}" Text="{Binding Path=Name}" FontSize="Large"/>
             </StackLayout>
-            <StackLayout Margin="10, 0, 0, 0">
-                <Label Text="Assessment Type:"/>
-                <Picker x:Name="TypePicker" SelectedItem="{Binding Path=Type}" />
-            </StackLayout>
 
             <StackLayout Margin="10, 0, 0, 5">
                 <Label Text="Due Date: "/>

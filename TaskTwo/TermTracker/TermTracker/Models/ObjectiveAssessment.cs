@@ -58,6 +58,15 @@ namespace TermTracker.Models
                return conn.Delete(assessment);
             }
       }
+      // Deletes EVERYTHING in the ObjectiveAssessment table
+      public static int DeleteContents()
+      {
+         using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+         {
+            conn.CreateTable<ObjectiveAssessment>();
+            return conn.DeleteAll<ObjectiveAssessment>();
+         }
+      }
       public static string CheckObjNotifications()
       {
          var message = "";

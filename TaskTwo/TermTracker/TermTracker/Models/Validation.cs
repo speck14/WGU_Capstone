@@ -34,5 +34,20 @@ namespace TermTracker.Models
             return false;
          }
       }
+      public static bool IsValidTime(string time)
+      {
+         Console.WriteLine(time);
+         // RegEx pattern source: https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
+         Regex regex = new Regex(@"([01]?[0-9]|2[0-3]):[0-5][0-9]");
+         Match match = regex.Match(time);
+         if (match.Success)
+         {
+            return true;
+         }
+         else
+         {
+            return false;
+         }
+      }
    }
 }

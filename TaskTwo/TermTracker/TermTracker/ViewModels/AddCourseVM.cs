@@ -204,7 +204,7 @@ namespace TermTracker.ViewModels
                   DueDateNotification = false,
                   CourseId = response,
                   PreAssessmentScore = "Not entered",
-                  ScheduledDate = "Not scheduled",
+                  ScheduledDate = course.DueDate,
                   ScheduledTime = "00:00",
                   ScheduledDateNotification = false
                };
@@ -220,7 +220,6 @@ namespace TermTracker.ViewModels
                assessment_res += PerformanceAssessment.AddPerfAssessment(performanceAssessment);
                if(assessment_res > 0)
                {
-                  Console.WriteLine(assessment_res);
                   MessagingCenter.Send(this, "AddCourse");
                   await App.Current.MainPage.Navigation.PopAsync();
                }
