@@ -41,7 +41,10 @@ namespace TermTracker.Views
 
       private void Courses_ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
       {
-
+         if (Courses_ListView.SelectedItem is Course currentCourse)
+         {
+            Navigation.PushAsync(new CourseView(currentCourse));
+         }
       }
    }
 }
