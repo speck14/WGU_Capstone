@@ -35,12 +35,25 @@ namespace TermTracker.ViewModels
          get { return endDate; }
          set
          {
-            startDate = value;
+            endDate = value;
             OnPropertyChanged("EndDate");
+         }
+      }
+      private string reportDate;
+      public string ReportDate
+      {
+         get { return reportDate; }
+         set
+         {
+            reportDate = value;
+            OnPropertyChanged("ReportDate");
          }
       }
       public ReportsVM ()
       {
+         startDate = DateTime.Now.Date;
+         endDate = DateTime.Now.Date;
+         reportDate = DateTime.Now.ToString();
          Assessments = new ObservableCollection<Assessment>();
          GenerateReportsCommand = new Command(GenerateReport);
       }
@@ -50,8 +63,16 @@ namespace TermTracker.ViewModels
       }
       private void GenerateReport()
       {
-        // var reportResults = Reports.GenerateReports(startDate, endDate);
-         Application.Current.MainPage.Navigation.PushAsync(new ReportResults(ObjectiveAssessment.GetObjAssessments(3)));
+         var reportResults = Reports.GenerateReports(startDate, endDate);
+         Application.Current.MainPage.Navigation.PushAsync(new ReportResults(reportResults, ReportDate));
+      }
+      public void GetAssessments(List<ObjectiveAssessment> assessments)
+      {
+         Assessments.Clear();
+         foreach (var assessment in assessments)
+         {
+            Assessments.Add(assessment);
+         }
       }
    }
 }

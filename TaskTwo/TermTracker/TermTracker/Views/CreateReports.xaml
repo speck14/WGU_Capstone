@@ -4,6 +4,10 @@
              x:Class="TermTracker.Views.CreateReports">
     <ContentPage.Content>
         <StackLayout >
+            <Label Text="Start Date: " FontSize="Medium"/>
+            <DatePicker Date="{Binding StartDate, Mode=TwoWay}"/>
+            <Label Text="End Date: " FontSize="Medium"/>
+            <DatePicker Date="{Binding EndDate, Mode=TwoWay}"/>
             <Button Margin="10, 0, 0, 10" Text="Generate Report" Command="{Binding Path=GenerateReportsCommand}"/>
         </StackLayout>
     </ContentPage.Content>
