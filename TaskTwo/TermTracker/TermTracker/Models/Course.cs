@@ -82,7 +82,7 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Course>();
-            return conn.Table<Course>().Where(course => course.Name.ToLower().Contains(searchString) ).ToList();
+            return conn.Table<Course>().Where(course => course.Name.ToLower().Contains(@searchString) ).ToList();
          }
       }
       public static int AddCourse(Course course)
@@ -105,7 +105,7 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Course>();
-            return conn.Update(course);
+            return conn.Update(@course);
          }
       }
       public static int DeleteCourse(Course course)

@@ -4,6 +4,8 @@
              x:Class="TermTracker.Views.CreateReports">
     <ContentPage.Content>
         <StackLayout >
+            <Label Text="Enter report title:"/>
+            <Entry Text="{Binding ReportTitle}"/>
             <Label Text="Start Date: " FontSize="Medium"/>
             <DatePicker Date="{Binding StartDate, Mode=TwoWay}"/>
             <Label Text="End Date: " FontSize="Medium"/>

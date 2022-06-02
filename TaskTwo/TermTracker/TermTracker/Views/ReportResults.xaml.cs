@@ -17,19 +17,29 @@ namespace TermTracker.Views
       ReportsVM ViewModel;
       List<ObjectiveAssessment> assessments;
       string reportDate;
-      public ReportResults(List<ObjectiveAssessment> ReportResults, string reportDate)
+      string reportTitle;
+      public ReportResults(List<ObjectiveAssessment> ReportResults, string reportDate, string reportTitle)
       {
          InitializeComponent();
          assessments = ReportResults;
          ViewModel = Resources["vm"] as ReportsVM;
          this.reportDate = reportDate;
+         this.reportTitle = reportTitle;
       }
       protected override void OnAppearing()
       {
          base.OnAppearing();
          var results_stack = this.FindByName<StackLayout>("report_stack");
+
          var time_label = this.FindByName<Label>("report_datetime");
          time_label.Text = reportDate;
+
+         var title_label = this.FindByName<Label>("report_title");
+         if(!String.IsNullOrEmpty(reportTitle))
+         {
+            title_label.Text = reportTitle;
+         }        
+
          if (assessments != null && assessments.Any())
          {
             ViewModel.GetAssessments(assessments);

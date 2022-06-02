@@ -40,7 +40,7 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<ObjectiveAssessment>();
-            return conn.Update(assessment);
+            return conn.Update(@assessment);
          }
       }
       public static int UpdateAssessment(PerformanceAssessment assessment)
@@ -48,7 +48,7 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<PerformanceAssessment>();
-            return conn.Update(assessment);
+            return conn.Update(@assessment);
          }
       }
       public static int DeleteAssessments(int courseId)

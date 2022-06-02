@@ -35,7 +35,7 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Term>();
-            return conn.Insert(term);
+            return conn.Insert(@term);
          }
       }
       public static int UpdateTerm(Term term)
@@ -43,7 +43,7 @@ namespace TermTracker.Models
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
             conn.CreateTable<Term>();
-            return conn.Update(term);
+            return conn.Update(@term);
          }
       }
       public static int DeleteTerm(Term term)
