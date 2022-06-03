@@ -1,0 +1,16 @@
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\TermTracker.UnitTests.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\TermTracker.UnitTests.pdb
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\TermTracker.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\TermTracker.pdb
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\obj\Debug\TermTracker.UnitTests.csproj.AssemblyReference.cache
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\obj\Debug\TermTracker.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\obj\Debug\TermTracker.UnitTests.csproj.CopyComplete
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\obj\Debug\TermTracker.UnitTests.dll
+C:\Users\Shannon\Documents\WGU_Capstone\TaskTwo\TermTracker\TermTracker.UnitTests\obj\Debug\TermTracker.UnitTests.pdb

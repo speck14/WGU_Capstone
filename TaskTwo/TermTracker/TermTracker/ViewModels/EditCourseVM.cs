@@ -198,7 +198,7 @@ namespace TermTracker.ViewModels
          }
          else if (!Validation.IsValidPhone(instructorPhone))
          {
-            Application.Current.MainPage.DisplayAlert("Error", "Please use this phone format: XXX-XXX-XXXX", "Ok");
+            Application.Current.MainPage.DisplayAlert("Error", "Please enter valid phone number.", "Ok");
          }
          else if (startDate > endDate || startDate > dueDate)
          {

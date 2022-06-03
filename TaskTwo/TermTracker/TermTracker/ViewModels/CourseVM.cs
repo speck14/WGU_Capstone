@@ -258,7 +258,7 @@ namespace TermTracker.ViewModels
          }
          else
          {
-            await Application.Current.MainPage.DisplayAlert("Error", "Invalid phone number", "Ok");
+            await Application.Current.MainPage.DisplayAlert("Error", "Invalid phone number.", "Ok");
          }
       }
       public void ViewAssessments()
