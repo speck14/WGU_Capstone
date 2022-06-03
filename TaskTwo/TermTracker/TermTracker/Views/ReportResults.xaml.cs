@@ -47,6 +47,9 @@ namespace TermTracker.Views
          // If there are no search results
          else
          {
+            var reports_label = new Label();
+            reports_label.Text = reportTitle;
+            results_stack.Children.Add(reports_label);
             results_stack.Children.Add(new Label { Text = "Report generated 0 records", FontSize = 24 });
             results_stack.Children.Add(new Label { Text = "Report created: " });
             var timeLabel = new Label();

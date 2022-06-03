@@ -4,6 +4,7 @@
              x:Class="TermTracker.Views.CreateReports">
     <ContentPage.Content>
         <StackLayout >
+            <Label Text="Upcoming Objective Assessment Report:" FontSize="Large"/>
             <Label Text="Enter report title:"/>
             <Entry Text="{Binding ReportTitle}"/>
             <Label Text="Start Date: " FontSize="Medium"/>

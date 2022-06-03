@@ -56,13 +56,6 @@ namespace TermTracker.Models
          var deleted = 0;
          using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
          {
-            // Delete from Assessment table in case there's anything in there
-            List<Assessment> assessments = conn.Query<Assessment>($"SELECT * FROM Assessment WHERE CourseId=courseId");
-            foreach(var assessment in assessments)
-            {
-               conn.CreateTable<Assessment>();
-               deleted += conn.Delete(assessment);
-            }
             deleted += ObjectiveAssessment.DeleteObjAssessment(courseId);
             deleted += PerformanceAssessment.DeletePerfAssessment(courseId);
             return deleted;

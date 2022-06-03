@@ -2217,24 +2217,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Shannon\\.nuget\\packages\\": {},
+    "C:\\Users\\shann\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Shannon\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker.Android\\TermTracker.Android.csproj",
+      "projectUniqueName": "C:\\Users\\shann\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker.Android\\TermTracker.Android.csproj",
       "projectName": "TermTracker.Android",
-      "projectPath": "C:\\Users\\Shannon\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker.Android\\TermTracker.Android.csproj",
-      "packagesPath": "C:\\Users\\Shannon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Shannon\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker.Android\\obj\\",
+      "projectPath": "C:\\Users\\shann\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker.Android\\TermTracker.Android.csproj",
+      "packagesPath": "C:\\Users\\shann\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\shann\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Shannon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\shann\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -2248,8 +2248,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "C:\\Users\\Shannon\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker\\TermTracker.csproj": {
-              "projectPath": "C:\\Users\\Shannon\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker\\TermTracker.csproj"
+            "C:\\Users\\shann\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker\\TermTracker.csproj": {
+              "projectPath": "C:\\Users\\shann\\Documents\\WGU_Capstone\\TaskTwo\\TermTracker\\TermTracker\\TermTracker.csproj"
             }
           }
         }

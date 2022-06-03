@@ -13,7 +13,7 @@
             <StackLayout x:Name="report_stack">
                 <ListView x:Name="Assessments_ListView" ItemsSource="{Binding Source={StaticResource vm}, Path=Assessments}" HasUnevenRows="True">
                     <ListView.Header>
-                        <StackLayout>
+                        <StackLayout Margin="10, 0, 0, 5">
                             <Label x:Name="report_title"/>
                         </StackLayout>
                     </ListView.Header>

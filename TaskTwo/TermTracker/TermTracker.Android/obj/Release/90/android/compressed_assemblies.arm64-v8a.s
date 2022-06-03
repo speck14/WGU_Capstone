@@ -206,7 +206,7 @@
 
 	/* 22: TermTracker.dll */
 	/* uncompressed_file_size */
-	.word	121856
+	.word	122368
 	/* loaded */
 	.byte	0
 	/* data */
