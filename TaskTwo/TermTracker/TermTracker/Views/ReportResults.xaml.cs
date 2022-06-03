@@ -18,13 +18,13 @@ namespace TermTracker.Views
       List<ObjectiveAssessment> assessments;
       string reportDate;
       string reportTitle;
-      public ReportResults(List<ObjectiveAssessment> ReportResults, string reportDate, string reportTitle)
+      public ReportResults(List<ObjectiveAssessment> ReportResults, string reportDate, string report_Title)
       {
          InitializeComponent();
          assessments = ReportResults;
          ViewModel = Resources["vm"] as ReportsVM;
          this.reportDate = reportDate;
-         this.reportTitle = reportTitle;
+         this.reportTitle = report_Title;
       }
       protected override void OnAppearing()
       {
